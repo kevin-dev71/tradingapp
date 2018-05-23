@@ -24,6 +24,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @property string $role_id
+ * @property string|null $last_name
+ * @property string|null $picture
+ * @property-read \App\Role $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Trade[] $trades
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePicture($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
  */
 class User extends Authenticatable
 {

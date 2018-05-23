@@ -60,6 +60,7 @@ return [
     'birthdaydate'            => 'Será 23 el 24 de abril',
     'progress'                => 'Progreso de Tareas',
     'customtemplate'          => 'Diseño plantilla personalizada',
+    'stats'                     => 'Estadisticas',
     'statstab'                => 'Pestaña de Contenido de Estadisticas',
     'generalset'              => 'Configuración general',
     'reportpanel'             => 'Informe de uso del panel',
