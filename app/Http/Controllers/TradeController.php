@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trade;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class TradeController extends Controller
 {
@@ -12,10 +13,21 @@ class TradeController extends Controller
         $trades = Trade::with('instrument')
             ->whereUserId(auth()->user()->id)
             ->latest()
-            ->paginate(12);
+            ->paginate(20);
 
 
         return view('trades.index' , compact('trades'));
+
+    }
+
+    public function datatable(){
+
+        $trades = Trade::with('instrument')
+            ->whereUserId(auth()->user()->id)
+            ->latest();
+
+
+        return DataTables::of($trades)->make(true);
 
     }
     /*public function show(Course $course){

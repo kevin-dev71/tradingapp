@@ -1,9 +1,9 @@
 <!-- Main Header -->
 <!-- Main Header -->
-<header class="main-header">
+<header class="main-header" style="position: fixed; width: 99.1vw;">
 
     <!-- Logo -->
-    <a href="{{ url('/home') }}" class="logo">
+    <a href="{{ url('/home') }}" class="logo" style="position:fixed">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->

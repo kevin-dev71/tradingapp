@@ -31,11 +31,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Instrument extends Model
 {
+
+    protected $appends = ['market_formatted'];
+
     public function trades(){
         return $this->hasMany(Trade::class)->select('id' , 'user_id', 'instrument_id' , 'point');
     }
 
     public function market(){
         return $this->belongsTo(Market::class);
+    }
+
+    public function getMarketFormattedAttribute(){
+        return $this->market->pluck('name')->implode(', ');
     }
 }

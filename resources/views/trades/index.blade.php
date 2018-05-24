@@ -1,11 +1,16 @@
 @extends('adminlte::layouts.app')
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+@endpush
+
 @section('main-content')
     <div class="container-fluid spark-screen">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Responsive Hover Table</h3>
+                        <h3 class="box-title">Historico de Trades</h3>
 
                         <div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -19,49 +24,56 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
+                        <table id="trades-table" class="table table-hover table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Reason</th>
+                                <th>{{ __("ID") }}</th>
+                                <th>{{ __("Mercado") }}</th>
+                                <th>{{ __("Instrumento") }}</th>
+                                <th>{{ __("Puntos") }}</th>
+                                <th>{{ __("Fecha") }}</th>
                             </tr>
-                            <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
+                            </thead>
+
                         </table>
+
+
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </div>
+            <!-- /.row -->
         </div>
+        <!-- /.col-xs-12 -->
     </div>
+    <!-- /.container-fluid spark-screen -->
 
 @endsection
+
+@section('scripts')
+    @parent
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let dt;
+            dt = $("#trades-table").DataTable({
+                pageLength: 10,
+                lengthMenu: [ 10, 25, 50, 75, 100 ],
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('trades.datatable') }}',
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                columns: [
+                    {data: 'id', visible: false},
+                    {data: 'instrument.market_formatted'},
+                    {data: 'instrument.name'},
+                    {data: 'point'},
+                    {data: 'created_at'}
+                ]
+            })
+        })
+    </script>
+@stop

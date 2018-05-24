@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Trade
@@ -27,6 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Trade extends Model
 {
+
+    use SoftDeletes;
+
     /**
      * @return $this
      */
@@ -37,4 +41,5 @@ class Trade extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
 }

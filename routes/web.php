@@ -24,5 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
 // ====================== TradeController ROUTEs =====================
     Route::group(['prefix' => 'trades'], function(){
         Route::get('/index' , 'TradeController@index')->name('trades.index');
+        Route::get('/datatable' , 'TradeController@datatable')->name('trades.datatable');
     });
 });
