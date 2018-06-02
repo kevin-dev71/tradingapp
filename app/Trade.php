@@ -25,11 +25,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Trade wherePoint($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Trade whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Trade whereUserId($value)
+ * @property-read mixed $market_id
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Trade onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Trade withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Trade withoutTrashed()
+ * @property-read mixed $point_stats
  */
 class Trade extends Model
 {
 
     use SoftDeletes;
+
+    protected $fillable = ['user_id' , 'point', 'instrument_id'];
+
+    protected $appends = ['market_id'];
 
     /**
      * @return $this
@@ -41,5 +52,17 @@ class Trade extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function getMarketIdAttribute(){
+        return $this->instrument->market_id;
+    }
+
+    /*public function getPointStatsAttribute(){
+        return array(
+            'total_win' => self::where('point' , '>', '0')->sum('point'),
+            'total_lose' => self::where('point' , '<', '0')->sum('point'),
+            'total' => self::sum('point')
+        );
+    }*/
 
 }

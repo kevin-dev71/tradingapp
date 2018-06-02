@@ -66,4 +66,24 @@ class User extends Authenticatable
     public function trades(){
         return $this->hasMany(Trade::class)->select('id' , 'user_id', 'instrument_id' , 'point');
     }
+
+    public function getPointStatsByUserId($id){
+        return array(
+            'total_win' => Trade::where('point' , '>', '0')
+                ->where('user_id' , $id)
+                ->sum('point'),
+            'total_lose' => Trade::where('point' , '<', '0')
+                ->where('user_id' , $id)
+                ->sum('point')
+        );
+    }
+
+    public function getTradesByUserIdByMonth($id, $month){
+        
+        /*return array(
+            'total_win' => Trade::where('point' , '>', '0')
+                ->where('user_id' , $id)
+                ->sum('point')
+        );*/
+    }
 }

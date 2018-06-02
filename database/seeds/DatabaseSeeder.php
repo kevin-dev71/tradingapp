@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('users');
         Storage::makeDirectory('users');
 
-        factory(Role::class, 1)->create(['name' => 'admin']);
-        factory(Role::class, 1)->create(['name' => 'user_basic']);
+        factory(Role::class, 1)->create(['name' => 'ADMIN']);
+        factory(Role::class, 1)->create(['name' => 'USER_BASIC']);
 
         factory(Market::class, 1)->create(['name' => 'Futures']);
         factory(Instrument::class, 1)->create([
@@ -30,11 +30,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'E-mini SP500'
         ]);
 
-        factory(User::class, 1)->create([
+        /*factory(User::class, 1)->create([
             'name' => 'admin',
             'last_name' => 'admin',
             'email' => 'admin@mail.com',
-            'password' => bcrypt('secret'),
+            'password' => bcrypt('secretsecretx2'),
             'role_id' => \App\Role::ADMIN
         ]);
 
@@ -49,6 +49,6 @@ class DatabaseSeeder extends Seeder
             ->each(function(Trade $t){
                 $t->created_at = Carbon::now()->subDays($t->id);
                 $t->save();
-            });
+            });*/
     }
 }

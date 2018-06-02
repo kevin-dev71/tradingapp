@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Instrument wherePointValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Instrument whereTickSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Instrument whereUpdatedAt($value)
+ * @property-read mixed $market_formatted
  */
 class Instrument extends Model
 {

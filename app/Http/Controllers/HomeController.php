@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Trade;
 use Illuminate\Http\Request;
 
 /**
@@ -31,9 +32,28 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index(){
+        // ============ SUMMARY ROW 1 BOXES ==================
+        $trades = Trade::whereUserId(auth()->user()->id);
+        $point_stats = auth()->user()->getPointStatsByUserId(auth()->user()->id);
+        $total_points = $point_stats['total_win'] + $point_stats['total_lose'];
+        $profit = $total_points * $trades->first()->instrument->point_value;
 
-        return view('adminlte::home');
+        $point_stats = array_merge(
+            $point_stats ,
+            [
+                'total_points' => $total_points ,
+                'profit' => $profit
+            ]
+        );
+
+        // ============ SUMMARY ROW 2 CHART ==================
+
+
+        return view('summary' , compact('trades' , 'point_stats'));
+    }
+
+    public function balance_chart(){
+        $result = $trades = Trade::whereUserId(auth()->user()->id);
     }
 }

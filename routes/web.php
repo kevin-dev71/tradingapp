@@ -22,8 +22,5 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
 
 // ====================== TradeController ROUTEs =====================
-    Route::group(['prefix' => 'trades'], function(){
-        Route::get('/index' , 'TradeController@index')->name('trades.index');
-        Route::get('/datatable' , 'TradeController@datatable')->name('trades.datatable');
-    });
+    Route::resource('trades' , 'TradeController');
 });
