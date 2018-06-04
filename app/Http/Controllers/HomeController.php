@@ -37,7 +37,12 @@ class HomeController extends Controller
         $trades = Trade::whereUserId(auth()->user()->id);
         $point_stats = auth()->user()->getPointStatsByUserId(auth()->user()->id);
         $total_points = $point_stats['total_win'] + $point_stats['total_lose'];
-        $profit = $total_points * $trades->first()->instrument->point_value;
+        $result = $trades->first();
+        if (is_null($result)) {
+            $profit = 0;
+        } else {
+            $profit = $total_points *  $result->instrument->point_value;
+        }
 
         $point_stats = array_merge(
             $point_stats ,
