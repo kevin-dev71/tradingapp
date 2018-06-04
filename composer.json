@@ -42,8 +42,6 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "barryvdh/laravel-debugbar",
-                "laravel/dusk"
             ]
         }
     },
